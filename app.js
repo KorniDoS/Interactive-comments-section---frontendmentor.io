@@ -1,5 +1,6 @@
 const tabletMediaQuery = window.matchMedia('screen and (max-width: 574px)'); //tablet media query
 const desktopMediaQuery = window.matchMedia('screen and (min-width: 900px)'); //desktop media query
+const landscape = window.matchMedia('(orientation: landscape)'); //landscape orientation
 const main = document.querySelector('main'); //Main tag selector
 
 
@@ -1181,7 +1182,10 @@ const createApp = async (fetchedJson) => {
     //Responsive insert comment container on load
     window.addEventListener('DOMContentLoaded', function () { responsiveCommentInsertContainer(comments_data, document.querySelector('.insert-comment')) });
     //Responsive insert comment container on resize
-    //window.addEventListener('resize', function () { responsiveCommentInsertContainer(comments_data, document.querySelector('.insert-comment')) })
+    if(desktopMediaQuery.matches && landscape.matches){ //Only allow resizing on desktop devices, this resize listener prevents the user from entering a comment on mobile by not keeping the keyboard
+      window.addEventListener('resize', function () { responsiveCommentInsertContainer(comments_data, document.querySelector('.insert-comment')) })
+      window.removeEventListener('DOMContentLoaded', responsiveCommentInsertContainer);
+    }
 
 
   }
