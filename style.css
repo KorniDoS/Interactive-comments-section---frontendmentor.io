@@ -1,0 +1,602 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+/*# Front-end Style Guide
+
+## Layout
+
+The designs were created to the following widths:
+
+- Mobile: 375px
+- Desktop: 1440px
+
+## Colors
+
+### Primary
+
+- Moderate blue: hsl(238, 40%, 52%)
+- Soft Red: hsl(358, 79%, 66%)
+- Light grayish blue: hsl(239, 57%, 85%)
+- Pale red: hsl(357, 100%, 86%)
+
+### Neutral
+
+- Dark blue: hsl(212, 24%, 26%)
+- Grayish Blue: hsl(211, 10%, 45%)
+- Light gray: hsl(223, 19%, 93%)
+- Very light gray: hsl(228, 33%, 97%)
+- White: hsl(0, 0%, 100%)
+
+## Typography
+
+### Body Copy
+
+- Font size (paragraph): 16px
+
+### Font
+
+- Family: [Rubik](https://fonts.google.com/specimen/Rubik)
+- Weights: 400, 500, 700
+
+*/
+
+:root {
+    --primary-moderate-blue: hsl(238, 40%, 52%);
+    --primary-soft-red: hsl(358, 79%, 66%);
+    --primary-light-grayish-blue: hsl(239, 57%, 85%);
+    --primary-pale-red: hsl(357, 100%, 86%);
+
+
+    --neutral-dark-blue: hsl(212, 24%, 26%);
+    --neutral-grayish-blue: hsl(211, 10%, 45%);
+    --neutral-light-gray: hsl(223, 19%, 93%);
+    --neutral-very-light-gray: hsl(228, 33%, 97%);
+    --white: hsl(0, 0%, 100%)
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Rubik', serif;
+    display: block;
+    text-rendering: optimizeLegibility;
+    background-color: var(--neutral-very-light-gray);
+
+}
+
+/*Special class for inserting replies card*/
+.is-reply {
+    width: 96% !important;
+    left: 4% !important;
+}
+
+
+/*User data div*/
+.user-data {
+    margin-block-end: 1rem;
+}
+
+
+/*Profile picture*/
+.profile-picture {
+    width: 2rem;
+    height: 2rem;
+}
+
+/*Username*/
+.username {
+    color: var(--neutral-dark-blue);
+    font-weight: 700;
+}
+
+
+/*First card*/
+.card:first-child {
+    margin-block-start: 1.5rem;
+}
+
+
+/*Card*/
+.card {
+    padding: 1rem;
+    margin-block-end: 1rem;
+    border-radius: 8px;
+}
+
+/*Comment score*/
+.comment-score {
+    width: 6rem;
+    height: 2rem;
+    border-radius: 10px;
+    background-color: var(--neutral-very-light-gray);
+    color: var(--primary-moderate-blue);
+    padding: 1.2rem;
+
+}
+
+/*Comment text*/
+.comment {
+    color: var(--neutral-grayish-blue);
+}
+
+
+/*Comment score upvote and downvote images styling on hover*/
+.plus-sign:hover,
+.minus-sign:hover {
+    filter: brightness(0) saturate(100%) invert(42%) sepia(74%) saturate(556%) hue-rotate(200deg) brightness(73%) contrast(93%);
+    cursor: pointer;
+
+}
+
+
+/*Reply card class, smaller than the card*/
+.reply {
+    width: 96%;
+    inset: auto auto auto 4%;
+    color: var(--neutral-grayish-blue);
+    /*margin-inline-start: 2rem;*/
+}
+
+
+/*Reply button container*/
+.reply-button-container {
+    position: absolute;
+    bottom: 23px;
+    right: 1.2rem;
+    gap: .3rem;
+    font-weight: 500;
+    cursor: pointer;
+
+
+}
+
+/*Reply button container:hover*/
+.reply-button-container:hover {
+    filter: brightness(0) saturate(100%) invert(80%) sepia(23%) saturate(512%) hue-rotate(201deg) brightness(97%) contrast(92%);
+}
+
+
+/*Reply button container link text styling*/
+.reply-button-container>a,
+.reply-button-container>a:link,
+.reply-button-container>a:visited {
+    text-decoration: none;
+    color: var(--primary-moderate-blue);
+}
+
+
+/*Reply button container link:hover effect*/
+.reply-button-container>a:hover {
+    color: var(--primary-light-grayish-blue);
+
+}
+
+/*Reply button - image*/
+.reply-button {
+    width: .8rem;
+    height: .8rem;
+    position: relative;
+    inset: auto 5% 12% auto;
+
+}
+
+/*Reply button - image:hover*/
+.reply-button:hover {
+    cursor: pointer;
+
+
+}
+
+
+/*Replying to @user text*/
+.replying-to {
+    color: var(--primary-moderate-blue);
+    font-weight: 500;
+}
+
+
+
+/*You div*/
+.you-div {
+    background-color: var(--primary-moderate-blue);
+    color: var(--white);
+    height: 17px;
+    font-size: .8rem;
+    font-weight: 500;
+    width: 35px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+}
+
+/*Created at tag*/
+.created-at {
+    color: var(--neutral-grayish-blue);
+}
+
+
+/*Delete&edit parent container*/
+.delete-edit-container {
+    position: absolute;
+    bottom: 23px;
+    right: 1.2rem;
+    gap: .6rem;
+    font-weight: 500;
+}
+
+/*Edit container links*/
+.edit a,
+.edit a:link,
+.edit a:visited {
+    text-decoration: none;
+    color: var(--primary-moderate-blue);
+}
+
+.edit:hover {
+    cursor: pointer;
+
+}
+
+
+/*Delete container links*/
+.delete a,
+.delete a:link,
+.delete a:visited {
+    text-decoration: none;
+    color: var(--primary-soft-red);
+
+}
+
+.delete:hover {
+    cursor: pointer;
+}
+
+
+
+
+/*Update btn container*/
+.update-btn-container {
+    position: absolute;
+    bottom: 23px;
+    right: 1.2rem;
+    gap: .6rem;
+    font-weight: 500;
+}
+
+
+/*Textarea*/
+textarea.form-control {
+    color: var(--neutral-grayish-blue);
+    height: 7rem;
+    margin-block-end: 1rem;
+    border-radius: 7px;
+    border-color: var(--neutral-grayish-blue);
+}
+
+/*General btn class*/
+button.btn {
+    color: var(--white);
+    background-color: var(--primary-moderate-blue);
+    padding: .6rem;
+    width: 6rem;
+
+}
+
+
+/*Btn hover*/
+button.btn:hover {
+    /*color: var(--neutral-dark-blue);*/
+    color: var(--neutral-light-gray);
+    background-color: var(--primary-light-grayish-blue);
+}
+
+
+/*Dialog*/
+div.dialog {
+    font-family: 'Rubik', serif;
+    padding: 1.5rem 0 0 2rem;
+    width: 23rem;
+    height: 15rem;
+    border: none;
+    border-radius: 6px;
+    display: none;
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background-color: var(--white);
+    text-align: left;
+    opacity: 1;
+
+}
+
+/*Add gap of 1rem between divs inside dialog*/
+.dialog div {
+    gap: 1rem;
+}
+
+/*Dialog p color*/
+.dialog p {
+    color: var(--neutral-grayish-blue)
+}
+
+/*Dialog title*/
+p.title {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--neutral-dark-blue);
+
+}
+
+/*Dialog background*/
+.background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    background-color: rgba(122, 122, 124, .7);
+
+}
+
+/*
+div.dialog::backdrop {
+    background-color: rgba(122, 122, 124, .7);
+}*/
+
+
+/*Cancel and delete button - modal*/
+.cancel,
+.delete-modal-button {
+    width: 9rem;
+    height: 3rem;
+    border-radius: 8px;
+    color: var(--white);
+    border: none;
+}
+
+.cancel {
+    background-color: var(--neutral-dark-blue);
+}
+
+.cancel:hover {
+    background-color: var(--neutral-grayish-blue);
+}
+
+.delete-modal-button {
+    background-color: var(--primary-soft-red);
+
+}
+
+.delete-modal-button:hover {
+    background-color: var(--primary-pale-red);
+}
+
+/*
+.comment-rule {
+}
+
+.comment-rule::before {
+    content: '';
+    transform: rotate(90deg);
+    position: absolute;
+    background-color: var(--neutral-grayish-blue);
+    opacity: .3;
+    width: 10px;
+    top: 560px;
+    height: 1px;
+    padding-inline-end: 210%;
+    left: -803px;
+    z-index: -1;
+}
+*/
+
+
+
+span.score-number {
+    font-weight: 500;
+}
+
+/*Insert comment container margin bottom - for attribution*/
+.insert-comment {
+    margin-block-end: 2rem;
+}
+
+
+
+/*Attribution styling*/
+.attribution {
+    font-size: 11px;
+    text-align: center;
+}
+
+.attribution a {
+    color: hsl(228, 45%, 44%);
+}
+
+footer>div.attribution {
+    margin-block-end: 2rem;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+    color: var(--neutral-dark-blue);
+}
+
+
+
+div.attribution>a:link,
+div.attribution>a:visited {
+    color: var(--primary-moderate-blue);
+    text-decoration: none;
+
+}
+
+div.attribution>a:hover,
+div.attribution>a:focus {
+    color: var(--primary-soft-red);
+    text-decoration: underline;
+}
+
+
+
+/*Desktop grid styling*/
+@media screen and (min-width: 900px) {
+
+
+    .card {
+        padding-top: 1.5rem;
+    }
+
+    .reply-button-container {
+        bottom: 12%;
+    }
+
+    .delete-edit-container {
+        position: unset;
+    }
+
+    .update-btn-container {
+        position: unset;
+        grid-column: 6/6;
+        grid-row: 3/3;
+        align-self: center;
+        justify-self: end;
+    }
+
+
+    .delete {
+        gap: .5rem !important;
+    }
+
+    .edit {
+        gap: .5rem !important;
+    }
+
+    .reply {
+        width: 88%;
+        inset: auto auto auto 12%;
+        display: grid;
+        grid-template-columns: 40px 40px 40px 1fr 1fr 40px;
+        grid-template-rows: 40px 1fr 30px;
+    }
+
+    .is-reply {
+        width: 88% !important;
+        left: 12% !important;
+    }
+
+    .reply>p.content {
+        grid-column: 2/span 4;
+        margin-inline-start: 1.2rem;
+        margin-block-start: .8rem;
+    }
+
+    .reply>div.comment-score {
+        grid-column: 1/1;
+        grid-row: 1/span 2;
+    }
+
+    .reply-button-container {
+        position: unset;
+        bottom: unset;
+        grid-row: 1/1;
+        grid-column: 6/6;
+        align-self: center;
+        justify-self: end;
+    }
+
+
+    .comment-div {
+        display: grid;
+        grid-template-columns: 40px 40px 40px 1fr 1fr 44px;
+        grid-template-rows: 40px 1fr 20px;
+    }
+
+    .comment-score {
+        width: 2rem;
+        height: 7rem;
+        flex-flow: column;
+    }
+
+
+    .user-data {
+        grid-column: 2/span 4;
+        grid-row: 1/1;
+        align-self: first baseline;
+        margin-block-start: .2rem;
+        margin-inline-start: 1.2rem;
+    }
+
+    .comment {
+        grid-column: 2/span 5;
+        grid-row: 2/2;
+        margin-inline-start: 1.2rem;
+        margin-block-start: .8rem;
+    }
+
+    .delete-edit-container {
+        gap: 1.5rem;
+        grid-column: 6/6;
+        grid-row: 1/1;
+        align-self: center;
+        margin-block-start: 0rem;
+        justify-self: self-end;
+    }
+
+
+    .insert-comment,
+    .insert-reply {
+        display: grid;
+        grid-template-columns: 50px 1fr 100px;
+        grid-template-rows: 75px 40px;
+    }
+
+
+    #main-textarea {
+        grid-column: 2/span 1;
+        grid-row: 1;
+    }
+
+    .reply-textarea {
+        grid-column: 2/span 1;
+        grid-row: 1;
+    }
+
+    .button-send {
+        right: 10px;
+    }
+
+    .update-com {
+        grid-column: 2/span 5;
+        grid-row: 2/2;
+        height: 135px;
+        width: 97.5%;
+        margin-inline-start: 1.2rem;
+
+    }
+
+
+
+}
+
+
+
+/*For a little bit bigger screens styling*/
+@media screen and (min-width: 1200px) {
+    .reply {
+        width: 92%;
+        inset: auto auto auto 8%;
+    }
+
+}
