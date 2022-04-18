@@ -1181,7 +1181,7 @@ const createApp = async (fetchedJson) => {
     //Responsive insert comment container on load
     window.addEventListener('DOMContentLoaded', function () { responsiveCommentInsertContainer(comments_data, document.querySelector('.insert-comment')) });
     //Responsive insert comment container on resize
-    window.addEventListener('resize', function () { responsiveCommentInsertContainer(comments_data, document.querySelector('.insert-comment')) })
+    //window.addEventListener('resize', function () { responsiveCommentInsertContainer(comments_data, document.querySelector('.insert-comment')) })
 
 
   }
