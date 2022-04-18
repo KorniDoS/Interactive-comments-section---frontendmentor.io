@@ -795,7 +795,7 @@ const insertReply = (btn) => { //Insert reply functionality
       <!--Reply score-->
       <div class="comment-score d-flex align-items-center justify-content-between">
       <img class="plus-sign" src="./images/icon-plus.svg" alt="plus">
-      <span class="score-number">2</span>
+      <span class="score-number">0</span>
       <img class="minus-sign" src="./images/icon-minus.svg" alt="minus">
       </div>
 
@@ -832,6 +832,8 @@ const insertReply = (btn) => { //Insert reply functionality
 
       editNewFunctionality(edit_new_single, "#reply-new-", "edit-reply-"); //Add edit functionality
       deleteCommentFunctionality(delete_new_single, dialog, background); //Add delete + modal functionality
+       upvoteComment(score_selector); //Upvote functionality
+      downvoteComment(score_selector); //Downvote functionality
       newReplyCounter++; //Increase no. of new replies
 
     }
@@ -1147,6 +1149,11 @@ const createApp = async (fetchedJson) => {
       if (event.keyCode === 13) {
         createNewComment(main_textarea, insertcomment, comments_data);
       }
+    })
+    
+    
+    main_textarea.addEventListener('click', (ev)=>{
+      main_textarea.focus();
     })
 
 
