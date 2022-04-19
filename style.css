@@ -75,7 +75,7 @@ body {
 /*Special class for inserting replies card*/
 .is-reply {
     width: 96% !important;
-    left: 4% !important;
+    inset: auto auto auto 4% !important;
 }
 
 
@@ -404,9 +404,9 @@ div.dialog::backdrop {
 */
 
 
-
+/*Score number*/
 span.score-number {
-    font-weight: 500;
+    font-weight: 300;
 }
 
 /*Insert comment container margin bottom - for attribution*/
@@ -574,6 +574,12 @@ div.attribution>a:focus {
     }
 
     .button-send {
+        position: absolute;
+        right: 10px;
+    }
+
+    #send {
+        position: absolute;
         right: 10px;
     }
 
@@ -584,6 +590,10 @@ div.attribution>a:focus {
         width: 97.5%;
         margin-inline-start: 1.2rem;
 
+    }
+
+    .insert-comment > div:nth-child(2){
+        align-items: flex-start !important;
     }
 
 
@@ -597,6 +607,11 @@ div.attribution>a:focus {
     .reply {
         width: 92%;
         inset: auto auto auto 8%;
+    }
+
+    .is-reply{
+        width: 92% !important;
+        inset: auto auto auto 8% !important;
     }
 
 }
