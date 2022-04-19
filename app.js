@@ -1,6 +1,5 @@
 const tabletMediaQuery = window.matchMedia('screen and (max-width: 574px)'); //tablet media query
 const desktopMediaQuery = window.matchMedia('screen and (min-width: 900px)'); //desktop media query
-const landscape = window.matchMedia('(orientation: landscape)'); //landscape orientation
 const main = document.querySelector('main'); //Main tag selector
 
 
@@ -65,6 +64,7 @@ const renderComments = (comments) => {
 const upvoteComment = (score_selector) => {
   const plusSign = document.querySelectorAll("img.plus-sign"); //Select all the plus signs
   const minusSign = document.querySelectorAll('img.minus-sign'); //Select all the minus signs
+ 
 
 
   plusSign.forEach((sign, index) => { //For each plus sign img
@@ -79,6 +79,7 @@ const upvoteComment = (score_selector) => {
       if (wasUpvoted === false) { // if wasUpvoted flag === false
         score++; //Increment score
         score_selector[index].textContent = score; //Update with the new score
+        score_selector[index].style="font-weight: 500;";
 
         wasUpvoted = true; //Set flag true
 
@@ -91,6 +92,7 @@ const upvoteComment = (score_selector) => {
         if (wasUpvoted === true) { //if flag is true
           score--; //Decrement score
           score_selector[index].textContent = score; //Update with the new score
+          score_selector[index].style="font-weight: 300;";
           wasUpvoted = false; //Set flag to false
 
           sign.removeEventListener('click', cancelUpvote); //Remove cancel upvote func
@@ -125,6 +127,7 @@ const downvoteComment = (score_selector) => {
         score--; //Decrement score
 
         score_selector[index].textContent = score; //Update score
+        score_selector[index].style="font-weight: 500;";
         wasDownvoted = true; //Set flag true
 
         sign.removeEventListener('click', downvote); //Remove downvote function
@@ -140,6 +143,7 @@ const downvoteComment = (score_selector) => {
           score++; //Increment score back
 
           score_selector[index].textContent = score; //Update score
+          score_selector[index].style="font-weight: 300;";
           wasDownvoted = false; //set flag false
 
           sign.removeEventListener('click', cancelDownvote); //Remove cancel Downvote funct
@@ -347,7 +351,7 @@ const editNewFunctionality = (edit_new_single, comment_new, edit) => {
     const comment_html = document.querySelector(`${comment_new}` + CSS.escape(evt.currentTarget.parentNode.children[1].id.replace(`${edit}`, "")));
     comment_html.style = "display: none"; //Hide the comment
 
-    let comment_text = comment_html.textContent/*edit_btn.closest('div.reply').querySelector('p.content').textContent;*/ 
+    let comment_text = comment_html.textContent/*edit_btn.closest('div.reply').querySelector('p.content').textContent;*/
 
 
     const card_reply_selector = evt.currentTarget.parentNode.parentNode;  //Reply card
@@ -377,7 +381,7 @@ const editNewFunctionality = (edit_new_single, comment_new, edit) => {
       const span_created_at = ev.currentTarget.parentNode.children[0].lastElementChild; //Created at
       const user_data = ev.currentTarget.parentNode.children[0]; //User data div
       let updatebtn = ev.currentTarget.parentNode.children[4]; //Update btn
-    
+
 
       reply_comm_text.innerHTML = `${text_area.value}`; //Reply comment gets the textarea text
       text_area.style = "display: none"; //Hide textarea
@@ -456,7 +460,7 @@ const Modal = (delete_selector, main) => {
           button.addEventListener('click', (delete_event) => {//On click
             const background = document.querySelector(".background");
             const dialog = document.querySelector('.dialog');
-            /*Hide and remove modal*/ 
+            /*Hide and remove modal*/
             dialog.style = "";
             background.style = "";
             background.style = "display: none";
@@ -825,6 +829,7 @@ const insertReply = (btn) => { //Insert reply functionality
       const edit_new_comments = document.querySelectorAll('div.edit-new'); //Select all new edit butons
       const delete_new_single = document.querySelector("#delete-reply-" + CSS.escape(newReplyCounter)); //Select the newly created Delete button
       const edit_new_single = document.querySelector("#edit-reply-" + CSS.escape(newReplyCounter)); //Select the newly created Edit button
+      const score_selector = document.querySelectorAll(".score-number"); //Select all the comment scores
       const dialog = document.createElement('div'); //Dialog
       const background = document.createElement('div'); //Dialog's background
 
@@ -833,7 +838,7 @@ const insertReply = (btn) => { //Insert reply functionality
 
       editNewFunctionality(edit_new_single, "#reply-new-", "edit-reply-"); //Add edit functionality
       deleteCommentFunctionality(delete_new_single, dialog, background); //Add delete + modal functionality
-       upvoteComment(score_selector); //Upvote functionality
+      upvoteComment(score_selector); //Upvote functionality
       downvoteComment(score_selector); //Downvote functionality
       newReplyCounter++; //Increase no. of new replies
 
@@ -851,7 +856,7 @@ const replyToComment = (reply_button_container, data) => {
 
     //On click
     btn.addEventListener('click', (ev) => {
- 
+
       const comment_select = ev.currentTarget.parentNode; //Comment selector
 
       const comment_select_username = ev.currentTarget.parentNode.children[0].children[1].textContent; //Username selector
@@ -1034,35 +1039,6 @@ const getCurrentUser = (comments_data) => {
 }
 
 
-
-/*Different insert comment container based on viewport*/
-const responsiveCommentInsertContainer = (data, container) => {
-
-
-  if (!desktopMediaQuery.matches) {
-    container.innerHTML = `
-    <textarea class="form-control" placeholder="Add a comment..." id="main-textarea"></textarea>
-    <div class="d-flex align-items-center justify-content-between"><img class="profile-picture" src="${data.currentUser.image.webp}" alt="profile picture"><button type="button" id="send" class="btn">SEND</button>`;
-    main.appendChild(container);
-  }
-  else if (desktopMediaQuery.matches) {
-    container.innerHTML = `
-    <textarea class="form-control" placeholder="Add a comment..." id="main-textarea"></textarea>
-    <div>
-    <div class="position-absolute">
-    <img class="profile-picture" src="${data.currentUser.image.webp}" alt="profile picture">
-    </div>
-    <div class="position-absolute button-send">
-
-    <button type="button" id="send" class="btn">SEND</button>
-    </div>`;
-
-    main.appendChild(container);
-  }
-
-
-}
-
 ///////////////////////////////////Functions//////////////////////////////////////////////////////
 
 
@@ -1084,13 +1060,13 @@ const fetchData = async () => {
 
 
   return new Promise((resolve, reject) => {
-     //if(localStorage.getItem('state')){
-  /////resolve(state)
-  /////reject('Oops! Resource not found!');
-  // } else{
+    //if(localStorage.getItem('state')){
+    /////resolve(state)
+    /////reject('Oops! Resource not found!');
+    // } else{
 
     resolve(data);
-   
+
     reject('Oops! Resource not found!');
 
   })
@@ -1114,14 +1090,43 @@ const createApp = async (fetchedJson) => {
 
   /*Add insert comment container*/
   const addCommentContainer = () => {
+    /*Create container elements*/
     const comment_container = document.createElement("div");
+    const div = document.createElement('div');
+    const text = document.createElement('textarea');
+    const img = document.createElement('img');
+    const btn = document.createElement('button');
     comment_container.classList.add("insert-comment");
     comment_container.classList.add("card");
-
     comment_container.classList.add("position-relative");
 
-    responsiveCommentInsertContainer(comments_data, comment_container);
+    text.classList.add('form-control');
+    text.id = 'main-textarea';
+    text.setAttribute('placeholder', "Add a comment...");
 
+    comment_container.appendChild(text);
+
+    div.classList.add('d-flex');
+    div.classList.add('align-items-center');
+    div.classList.add('justify-content-between');
+
+    img.classList.add('profile-picture');
+    img.src = comments_data.currentUser.image.webp;
+    img.alt = "profile picture";
+
+    btn.classList.add('btn');
+    btn.id = "send";
+    btn.setAttribute('type', "button");
+    btn.textContent = "SEND";
+
+
+    div.appendChild(img);
+    div.appendChild(btn);
+
+    comment_container.appendChild(div);
+
+
+    main.insertAdjacentElement('beforeend', comment_container);
 
   }
 
@@ -1151,9 +1156,9 @@ const createApp = async (fetchedJson) => {
         createNewComment(main_textarea, insertcomment, comments_data);
       }
     })
-    
-    
-    main_textarea.addEventListener('click', (ev)=>{
+
+
+    main_textarea.addEventListener('click', (ev) => {
       main_textarea.focus();
     })
 
@@ -1179,15 +1184,7 @@ const createApp = async (fetchedJson) => {
         e.preventDefault(); //Prevent links from scrolling to the top of the page after clicking
       })
     })
-    //Responsive insert comment container on load
-    window.addEventListener('DOMContentLoaded', function () { responsiveCommentInsertContainer(comments_data, document.querySelector('.insert-comment')) });
-    //Responsive insert comment container on resize
-    if(desktopMediaQuery.matches && landscape.matches){ //Only allow resizing on desktop devices, this resize listener prevents the user from entering a comment on mobile by not keeping the keyboard
-      window.addEventListener('resize', function () { responsiveCommentInsertContainer(comments_data, document.querySelector('.insert-comment')) })
-      window.removeEventListener('DOMContentLoaded', responsiveCommentInsertContainer);
-    }
-
-
+   
   }
 
   addEventListeners();
@@ -1218,17 +1215,23 @@ const createApp = async (fetchedJson) => {
                 "webp": `./images/avatars/image-${user[id].children[1].textContent}.webp`
               },
               "username": user[id].children[1].textContent
-            },
-            "replies": []
+            }
           }
+
+          // "replies": []
+          // }
         ]
 
       });
 
-     // window.localStorage.setItem(`test-${id}`, comments_obj);
+      // window.localStorage.setItem(`test-${id}`, comments_obj);
+      //let abc = new Object({...comments_obj}, {"test":"value"});
+      // console.log(comments_obj.comments);
+      //window.localStorage.setItem('random', abc);
 
     })
-    
+
+
   })
 
 }
