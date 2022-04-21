@@ -1195,14 +1195,14 @@ const createApp = async (fetchedJson) => {
       const replies_to_be_pushed = document.querySelectorAll(`[data-parent="${id + 1}"]`); //Get the replies with data-parent attr
 
       for (const reply of replies_to_be_pushed) { //For each reply
-        const span_user = reply.children[1].children[0].innerText; //Get the user mentioned with @
-        const id_value = reply.getAttribute('data-index'); //Id for the reply
-        const created_at = reply.children[0].children[2].textContent; //Get the created at info
-        const content = reply.children[1].innerText.replace(span_user, ""); //Get the content (without the @user)
-        const score = reply.children[2].children[1].textContent; //Reply score
-        const replying = span_user.replace('@', ""); // Replying to user
-        const image_url = reply.children[0].children[1].textContent;
-        const username = reply.children[0].children[1].textContent;
+        let span_user = reply.children[1].children[0].innerText; //Get the user mentioned with @
+        let id_value = reply.getAttribute('data-index'); //Id for the reply
+        let created_at = reply.children[0].children[2].textContent; //Get the created at info
+        let content = reply.children[1].innerText.replace(span_user, ""); //Get the content (without the @user)
+        let score = reply.children[2].children[1].textContent; //Reply score
+        let replying = span_user.replace('@', ""); // Replying to user
+        let image_url = reply.children[0].children[1].textContent;
+        let username = reply.children[0].children[1].textContent;
 
         if (reply.children[0].children[3]) { //If there is a YOU tag
           commentsObject[id].replies.push(
